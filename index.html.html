@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f5f0e8">
+<title>Вопросы сердца</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f0e8;color:#4a382d;font-family:Arial,sans-serif}
+.app{max-width:520px;margin:auto;padding:20px 16px 32px}.head{text-align:center}
+.kicker{font-weight:800;letter-spacing:2px;font-size:15px}h1{font-size:38px;line-height:1;margin:10px 0}
+.sub{color:#796c61;font-size:14px;line-height:1.4}
+.count{display:inline-block;background:white;border-radius:30px;padding:9px 16px;margin:13px 0;font-weight:800}
+.heart{margin:10px auto 15px;width:180px;height:145px;position:relative}
+.heart:before{content:"♥";position:absolute;inset:0;font-size:145px;line-height:145px;color:#e8ddc6}
+.heart span{position:absolute;left:0;right:0;top:45px;text-align:center;font-size:31px;font-weight:800;letter-spacing:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat{border:0;border-radius:20px;padding:18px 13px;text-align:left;min-height:120px;font-weight:800;color:#fff;box-shadow:0 12px 30px #00000012}
+.cat b{display:block;font-size:16px;margin-top:10px}.cat small{display:block;margin-top:5px;opacity:.8}
+.c1{background:#a9c9bd;color:#27483e}.c2{background:#e7d66d;color:#574e1d}.c3{background:#e98d86}.c4{background:#b49ab9}
+.random,.btn{width:100%;border:0;border-radius:16px;padding:15px;margin-top:12px;font-weight:800;font-size:15px;background:#fff;color:#4a382d}
+.screen{display:none}.top{display:flex;gap:9px;align-items:center;margin-bottom:13px}
+.back,.dice{border:0;border-radius:13px;background:#fff;padding:11px 13px;font-size:18px}.title{font-weight:800;flex:1;font-size:17px}
+.card{background:#fffdf9;border-radius:30px;padding:30px 22px;min-height:450px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 16px 45px #00000018}
+.tag{text-align:center;font-size:12px;font-weight:800;letter-spacing:1.5px;opacity:.65}
+.num{text-align:center;color:#796c61;margin:9px 0 25px;font-size:13px}
+.q{font-size:27px;line-height:1.22;text-align:center;font-weight:750}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.prev,.next{border:0;border-radius:16px;padding:15px;font-weight:800;font-size:14px}
+.prev{background:#eee7dc;color:#4a382d}.next{background:#4a382d;color:#fff}
+.progress{height:6px;background:#e3dacd;border-radius:9px;margin-bottom:16px;overflow:hidden}
+.bar{height:100%;background:#4a382d;width:0}
+@media(max-width:380px){h1{font-size:33px}.q{font-size:24px}}
+</style></head>
+<body>
+<div class="app">
+<section id="home">
+<div class="head">
+<div class="kicker">ХРИСТИАНСКАЯ ИГРА</div>
+<div class="heart"><span>✝ ? ♥</span></div>
+<h1>ВОПРОСЫ СЕРДЦА</h1>
+<div class="sub">Для глубоких разговоров, искреннего общения<br>и духовного роста</div>
+<div><span class="count">96 КАРТОЧЕК</span></div>
+</div>
+<div class="grid">
+<button class="cat c1" onclick="openCat(0)">🤝<b>Отношения с людьми</b><small>24 вопроса</small></button>
+<button class="cat c2" onclick="openCat(1)">🌱<b>Рост и перемены</b><small>24 вопроса</small></button>
+<button class="cat c3" onclick="openCat(2)">♥<b>Сердце перед Богом</b><small>24 вопроса</small></button>
+<button class="cat c4" onclick="openCat(3)">🔥<b>Вера и доверие</b><small>24 вопроса</small></button>
+</div>
+<button class="random" onclick="randomAll()">🎲 Случайный вопрос из всех 96</button>
+</section>
+<section id="screen" class="screen">
+<div class="top"><button class="back" onclick="home()">←</button><div class="title" id="title"></div><button class="dice" onclick="randomCat()">🎲</button></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="card">
+<div class="tag">ВОПРОС СЕРДЦА</div><div class="num" id="num"></div>
+<div class="q" id="q"></div>
+<div class="actions"><button class="prev" onclick="prev()">← Назад</button><button class="next" onclick="next()">Следующий →</button></div>
+<button class="btn" onclick="randomCat()">🎲 Случайный вопрос</button>
+</div>
+</section>
+</div>
+<script>
+const D={"Отношения с людьми": ["Кому тебе легче всего доверять — и почему?", "Что для тебя значит быть настоящим другом?", "Как ты обычно реагируешь, когда тебя неправильно понимают?", "Какой поступок другого человека однажды сильно тебя поддержал?", "Что тебе труднее: попросить прощения или простить?", "Как ты понимаешь слова: «носите бремена друг друга»?", "Есть ли человек, с которым тебе хотелось бы восстановить отношения?", "Что помогает тебе не отвечать злом на зло?", "Какие качества ты особенно ценишь в людях?", "Что ты делаешь, когда замечаешь, что начинаешь осуждать человека?", "Когда последний раз ты сделал добро человеку, который не мог ответить тебе тем же?", "Как научиться говорить правду с любовью?", "Что для тебя означает уважать человека, с которым ты не согласен?", "Как ты реагируешь на критику?", "Кому ты мог бы сегодня сказать: «Спасибо, что ты есть»?", "Что чаще всего мешает тебе проявлять любовь к людям?", "Как ты понимаешь христианскую любовь на практике?", "Есть ли у тебя человек, которому ты можешь честно рассказать о своих трудностях?", "Как отличить здоровую заботу о человеке от желания его контролировать?", "Что ты делаешь, когда видишь, что кто-то в группе чувствует себя одиноко?", "Какие слова поддержки ты сам хотел бы чаще слышать?", "Какой конфликт научил тебя чему-то важному?", "Что ты можешь изменить в своих отношениях уже на этой неделе?", "За кого из близких тебе хочется сегодня особенно помолиться?"], "Рост и перемены": ["В какой сфере жизни ты сейчас больше всего хочешь вырасти?", "Какую привычку тебе давно пора оставить?", "Что Бог учит тебя через нынешний этап жизни?", "Как ты понимаешь разницу между ростом и просто занятостью?", "Какая твоя ошибка в итоге стала важным уроком?", "Что ты обычно делаешь, когда не видишь быстрых результатов?", "В чём ты стал другим за последние несколько лет?", "Как ты понимаешь, что действительно духовно растёшь?", "Что тебе труднее всего отдавать Богу?", "Какая перемена в жизни сначала пугала тебя, но потом оказалась благословением?", "Как ты реагируешь, когда Бог меняет твои планы?", "Какой совет ты дал бы себе пять лет назад?", "Что помогает тебе продолжать путь после неудачи?", "Есть ли мечта, которую ты боишься доверить Богу?", "Что сейчас требует от тебя больше всего мужества?", "Как ты понимаешь библейское «обновление ума»?", "Какой духовный навык ты хотел бы развить?", "Что тебе помогает не сравнивать свой путь с путём других?", "Когда нужно терпеливо ждать, а когда — действовать?", "Какая книга Библии сильнее всего повлияла на тебя?", "Что ты хочешь изменить в своей повседневной жизни ради Бога?", "Как ты относишься к периодам, когда кажется, что ничего не происходит?", "Какую победу над собой ты можешь назвать своей недавней?", "Каким человеком ты хочешь стать через год?"], "Сердце перед Богом": ["Каким ты представляешь Бога, когда остаёшься с Ним наедине?", "За что ты сегодня особенно благодарен Богу?", "Когда тебе в последний раз было особенно легко почувствовать Божье присутствие?", "Что помогает тебе быть честным с Богом в молитве?", "Есть ли тема, о которой тебе трудно говорить с Богом?", "Какой библейский текст сейчас особенно близок твоему сердцу?", "Что для тебя означает любить Бога всем сердцем?", "Когда ты понял, что вера — это не только знание?", "Что мешает твоей молитвенной жизни?", "Как ты понимаешь Божье молчание?", "За что тебе труднее всего благодарить Бога?", "Что ты делаешь, когда не чувствуешь духовной мотивации?", "Как изменилось твоё представление о Боге за последние годы?", "Что для тебя означает жить перед Богом, а не перед людьми?", "Как ты отличаешь Божье водительство от собственных желаний?", "Есть ли обещание Бога, за которое ты сейчас особенно держишься?", "Что помогает тебе возвращаться к Богу после духовного падения?", "Какая черта характера Бога восхищает тебя больше всего?", "Как ты понимаешь Божью благодать лично для себя?", "Что ты хотел бы однажды спросить Бога?", "Когда ты в последний раз позволил Слову Божьему изменить твоё решение?", "Что сегодня занимает в твоём сердце место, которое должен занимать Бог?", "Как выглядит поклонение Богу вне церковного здания?", "Если бы тебе нужно было описать свои отношения с Богом одним словом, какое бы ты выбрал?"], "Вера и доверие": ["Что для тебя значит доверять Богу, когда ты не понимаешь происходящего?", "Какой страх тебе сложнее всего отдать Богу?", "Когда вера помогла тебе сделать шаг, на который ты сам бы не решился?", "Что ты делаешь, когда молитва остаётся без ожидаемого ответа?", "Как ты понимаешь разницу между верой и самоуверенностью?", "Есть ли обещание Бога, которому тебе сейчас особенно трудно доверять?", "Что помогает тебе сохранять надежду в трудный период?", "Когда ты в последний раз увидел ответ на молитву, который удивил тебя?", "Как вера влияет на твои решения о будущем?", "Что для тебя означает «ходить верою, а не видением»?", "Как ты реагируешь, когда Бог отвечает не так, как ты просил?", "Какой опыт научил тебя больше доверять Богу?", "Есть ли сфера, которую ты продолжаешь контролировать сам?", "Что помогает тебе не паниковать перед неизвестностью?", "Как вера влияет на твоё отношение к деньгам и материальным вещам?", "Как ты понимаешь Божье водительство в повседневных мелочах?", "Что бы ты сделал, если бы точно знал, что Бог с тобой?", "Как отличить настоящий риск ради Бога от безрассудства?", "Как ты поддерживаешь веру другого человека, когда он сомневается?", "Какая история библейского героя сильнее всего учит тебя доверию?", "Что ты хотел бы научиться отдавать Богу без попытки всё контролировать?", "Как ты понимаешь надежду на Второе пришествие Христа?", "Что помогает тебе доверять Богу в вопросах, на которые пока нет ответа?", "Если бы ты мог попросить Бога об одном изменении в своей вере сегодня, что бы это было?"]}; const names=Object.keys(D); let ci=0,qi=0;
+function render(){homeEl.style.display='none';screen.style.display='block';title.textContent=names[ci];q.textContent=D[names[ci]][qi];num.textContent=(qi+1)+' из '+D[names[ci]].length;bar.style.width=((qi+1)/D[names[ci]].length*100)+'%';}
+function openCat(i){ci=i;qi=0;render()} function next(){qi=(qi+1)%D[names[ci]].length;render()}
+function prev(){qi=(qi-1+D[names[ci]].length)%D[names[ci]].length;render()}
+function randomCat(){qi=Math.floor(Math.random()*D[names[ci]].length);render()}
+function randomAll(){ci=Math.floor(Math.random()*names.length);qi=Math.floor(Math.random()*D[names[ci]].length);render()}
+function home(){screen.style.display='none';homeEl.style.display='block'}
+const homeEl=document.getElementById('home'),screen=document.getElementById('screen'),title=document.getElementById('title'),q=document.getElementById('q'),num=document.getElementById('num'),bar=document.getElementById('bar');
+</script>
+</body></html>
